@@ -5,7 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import React from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import Weather from './components/weather';
+import Weather from './components/Weather';
 
 export class App extends React.Component {
   constructor(props) {
@@ -47,14 +47,18 @@ export class App extends React.Component {
   submission = async (event) =>{ 
     
     event.preventDefault();
-      let serverRoute = process.env.REACT_APP_SERVER;
-      console.log(serverRoute);
-      const url2 = `${serverRoute}/weather?cityName=${this.state.inputResult}`;
+    let serverRoute = process.env.REACT_APP_SERVER;
+    console.log(serverRoute);
+    const url2 = `${serverRoute}/weather?cityName=${this.state.inputResult}`;
+    try{
       const weatherData = await axios.get(url2);
       this.setState({weatherResult:weatherData.data,
-      }); 
-    }
+      });} 
     
+    catch(error){
+
+    }
+  }
   render() {
     return (
       <div>
